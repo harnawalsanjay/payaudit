@@ -2514,6 +2514,378 @@ function clearFixationStatement() { calculatedStatements = []; renderStatementTa
           });
       }
   }
+    <!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>पुणे महानगरपालिका रजा नोंद व सेवानिवृत्ती व्यवस्थापन प्रणाली</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<style>
+body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 20px; }
+.container { max-width: 1550px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+h2 { text-align: center; color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 10px; margin-bottom: 20px; }
+.tab-bar { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; flex-wrap: wrap; }
+.tab-btn { padding: 12px 25px; border: none; background-color: #e0e0e0; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 5px; transition: 0.3s; }
+.tab-btn.active { background-color: #1a73e8; color: white; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.setup-box, .macp-box { background: #e3f2fd; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb; margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+.entry-box { background: #fffde7; padding: 15px; border-radius: 8px; border: 1px solid #fbc02d; margin-bottom: 10px; display: flex; flex-direction: row; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+.entry-box > div { flex: 1; min-width: 130px; }
+.entry-box .btn-group { flex: initial; display: flex; flex-direction: row; gap: 8px; min-width: auto; flex-wrap: wrap; }
+
+.entry-box-p5 { background: #f3e5f5; border: 1px solid #9c27b0; padding: 15px; border-radius: 8px; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; align-items: end; }
+.radio-group { grid-column: 1 / -1; background: #fff; padding: 12px; border-radius: 6px; border: 1px solid #ddd; margin-top: 5px; }
+.radio-option { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: bold; color: #4a148c; cursor: pointer; }
+.radio-option input { width: auto; height: auto; cursor: pointer; }
+
+label { font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px; color: #333; white-space: nowrap; }
+input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; background-color: #fff; height: 38px; }
+input:disabled, input[readonly], select:disabled { background-color: #eee; color: #555; }
+
+.lwp-panel { background: #efebe9; padding: 15px; border-radius: 8px; border: 1px solid #d7ccc8; margin-bottom: 20px; display: none; }
+.lwp-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+.lwp-row div { flex: 1; }
+.btn-add-row { background: #795548; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.btn-remove-row { background: #d32f2f; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer; }
+.lwp-status { font-weight: bold; margin-top: 5px; font-size: 13px; }
+
+.preview-panel { background: #e0f2f1; padding: 12px 15px; border-radius: 6px; border: 1px dashed #00796b; margin-bottom: 20px; font-size: 13px; color: #004d40; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+.essential-box { background: #e0f2f1; padding: 15px; border-radius: 8px; border: 1px solid #4db6ac; margin-bottom: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; align-items: end; }
+
+.btn-add { background-color: #1a73e8; color: white; padding: 0 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; height: 38px; white-space: nowrap; text-align: center; }
+.btn-pagebreak { background-color: #0288d1; color: white; padding: 0 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; height: 38px; white-space: nowrap; text-align: center; }
+.btn-excel { background-color: #2e7d32; color: white; padding: 0 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; height: 38px; white-space: nowrap; text-align: center; }
+.btn-delete { background-color: #d32f2f; color: white; padding: 0 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; height: 38px; white-space: nowrap; text-align: center; }
+.btn-row-delete { background-color: #e53935; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; }
+.btn-row-edit { background-color: #0288d1; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; margin-right: 4px; }
+.btn-clear { background-color: #555555; color: white; padding: 0 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; height: 38px; white-space: nowrap; text-align: center; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 11px; }
+th, td { border: 1px solid #ddd; padding: 6px; text-align: center; }
+th { background-color: #1a73e8; color: white; }
+tr:nth-child(even) { background-color: #f9f9f9; }
+
+.employee-select-box { background: #e8f5e9; padding: 15px; border-radius: 8px; border: 1px solid #a5d6a7; margin-bottom: 20px; display: flex; gap: 15px; align-items: flex-end; }
+.import-box { background: #fff3e0; border: 1px dashed #e65100; padding: 10px 15px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+.encashment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px; }
+.encash-card { background: #f1f8e9; border: 1px solid #c8e6c9; padding: 15px; border-radius: 8px; }
+.encash-card h4 { margin: 0 0 10px 0; color: #2e7d32; border-bottom: 1px solid #c8e6c9; padding-bottom: 5px; }
+.footer-msg { margin-top: 30px; padding: 15px; background-color: #eeeeee; border-radius: 8px; text-align: center; font-size: 14px; color: #333; border: 1px solid #ccc; }
+</style>
+</head>
+<body>
+
+<div class="container" id="mainApp">
+    <h2>पुणे महानगरपालिका रजा नोंद व सेवानिवृत्ती व्यवस्थापन प्रणाली</h2>
+
+    <div class="employee-select-box">
+        <div style="flex: 1;">
+            <label style="color:#2e7d32;">👤 कर्मचारी शोधा आणि निवडा:</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="emp_search_filter" placeholder="🔍 नाव किंवा PF नंबर शोधा..." onkeyup="updateEmployeeDropdown()" style="width: 35%;">
+                <select id="global_employee_select" onchange="loadSelectedEmployeeData()" style="width: 65%;">
+                    <option value="">-- नवीन कर्मचारी / कोरी नोंदणी पुस्तिका --</option>
+                </select>
+            </div>
+        </div>
+        <div style="font-weight: bold; color: #1b5e20; padding-bottom: 10px;" id="current_active_emp_label">🎯 सद्या ॲक्टिव्ह: कोणतीही नोंद निवडलेली नाही</div>
+    </div>
+
+    <div class="tab-bar">
+        <button id="tab_btn_page1" class="tab-btn active" onclick="switchTab('page1')">१. रजा नोंदणी पुस्तिका</button>
+        <button id="tab_btn_page2" class="tab-btn" onclick="switchTab('page2')">२. निवृत्ती शिल्लक रजा वेतन</button>
+        <button id="tab_btn_page3" class="tab-btn" onclick="switchTab('page3')">३. कर्मचाऱ्यांची माहिती</button>
+    </div>
+
+    <div id="page1" class="tab-content active">
+        <div class="setup-box">
+            <div><label>मागील रजा संपल्याचा दिनांक (P3):</label><input type="text" id="p3_date" placeholder="DD/MM/YYYY"></div>
+            <div><label>सुरुवातीची शिल्लक EL (Z3):</label><input type="number" step="0.01" id="z3_bal"></div>
+            <div><label>सुरुवातीची शिल्लक ML (AA3):</label><input type="number" step="0.01" id="aa3_bal"></div>
+        </div>
+
+        <div class="entry-box">
+            <div><label>सुरवातीचा हजर दिनांक (A):</label><input type="text" id="a_start" placeholder="DD/MM/YYYY"></div>
+            <div><label>शेवटचा हजर दिनांक (B):</label><input type="text" id="b_end" placeholder="DD/MM/YYYY"></div>
+            <div><label>बिन पगारी रजा LWP (E):</label><input type="number" id="e_lwp" value="0"></div>
+            <div><label>रजेवर गेल्याचा दिनांक (O):</label><input type="text" id="o_leave_start" placeholder="DD/MM/YYYY"></div>
+            <div><label>रजा संपल्याचा दिनांक (P):</label><input type="text" id="p_leave_end" placeholder="DD/MM/YYYY"></div>
+            <div>
+                <label>रजेचा प्रकार (Q):</label>
+                <select id="q_type">
+                    <option value="हक्काची रजा">हक्काची रजा</option>
+                    <option value="वैद्यकीय रजा">वैद्यकीय रजा</option>
+                </select>
+            </div>
+            <div class="btn-group">
+                <button class="btn-add" onclick="addEntry()">जतन करा (Save)</button>
+                <button class="btn-delete" id="deleteBtn" style="display:none;" onclick="deleteLastEntry()">शेवटची नोंद हटवा</button>
+            </div>
+        </div>
+
+        <table id="recordTable">
+            <thead>
+                <tr>
+                    <th>हजर दिनांक (A-B)</th>
+                    <th>LWP (E)</th>
+                    <th>साठलेली EL (G)</th>
+                    <th>साठलेली ML (H)</th>
+                    <th>रजा प्रकार (Q)</th>
+                    <th>अंतिम शिल्लक EL</th>
+                    <th>अंतिम शिल्लक ML</th>
+                    <th>कारवाई</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="page2" class="tab-content">
+        <h3>सेवानिवृत्ती रजा रोखीकरण गणना</h3>
+        <div class="encashment-grid">
+            <div class="encash-card">
+                <label>एकूण शिल्लक हक्काची रजा:</label>
+                <input type="number" id="total_el_shilak" oninput="calculateEncashment()">
+            </div>
+            <div class="encash-card">
+                <label>एकूण शिल्लक मेडिकल रजा:</label>
+                <input type="number" id="total_ml_shilak" readonly>
+            </div>
+        </div>
+        <div class="setup-box">
+            <div><label>मूळ वेतन (Basic Pay):</label><input type="number" id="basic_pay" oninput="calculateEncashment()"></div>
+            <div><label>महागाई भत्ता (DA):</label><input type="number" id="da_amount" oninput="calculateEncashment()"></div>
+        </div>
+        <div class="footer-msg" id="encashmentResult">माहिती भरा, रक्कम येथे दिसेल.</div>
+    </div>
+
+    <div id="page3" class="tab-content">
+        <h3>कर्मचाऱ्यांची माहिती</h3>
+        <div class="setup-box">
+            <div><label>कर्मचाऱ्याचे नाव:</label><input type="text" id="info_name"></div>
+            <div><label>पदनाम:</label><input type="text" id="info_desig"></div>
+            <div><label>PF नंबर:</label><input type="text" id="info_pf"></div>
+        </div>
+        <button class="btn-excel" onclick="saveCurrentEmployeeToDatabase()">💾 सेव्ह करा</button>
+        <button class="btn-delete" onclick="deleteCurrentEmployeeFromDatabase()">🗑️ हटवा</button>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+let history = [];
+
+const config = { dateFormat: "d/m/Y", allowInput: true };
+flatpickr("#p3_date", config);
+flatpickr("#a_start", config);
+flatpickr("#b_end", config);
+flatpickr("#o_leave_start", config);
+flatpickr("#p_leave_end", config);
+
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    document.getElementById('tab_btn_' + tabId).classList.add('active');
+}
+
+function getDatabase() {
+    return JSON.parse(localStorage.getItem("pmc_employee_db")) || {};
+}
+
+function saveDatabase(db) {
+    localStorage.setItem("pmc_employee_db", JSON.stringify(db));
+}
+
+function updateEmployeeDropdown() {
+    let db = getDatabase();
+    let select = document.getElementById('global_employee_select');
+    let filter = document.getElementById('emp_search_filter').value.toLowerCase();
+    
+    select.innerHTML = '<option value="">-- नवीन कर्मचारी / कोरी नोंदणी पुस्तिका --</option>';
+    
+    for (let pf in db) {
+        let emp = db[pf];
+        let text = `${emp.info.name || 'नाव नाही'} (${pf})`;
+        if (text.toLowerCase().includes(filter)) {
+            let opt = document.createElement('option');
+            opt.value = pf;
+            opt.innerText = text;
+            select.appendChild(opt);
+        }
+    }
+}
+
+function saveCurrentEmployeeToDatabase() {
+    let pf = document.getElementById('info_pf').value.trim();
+    let name = document.getElementById('info_name').value.trim();
+
+    if (!pf) {
+        alert("⚠️ कृपया PF नंबर टाका!");
+        return;
+    }
+
+    let db = getDatabase();
+    db[pf] = {
+        info: {
+            name: name,
+            desig: document.getElementById('info_desig').value,
+            pf: pf
+        },
+        initialValues: {
+            p3: document.getElementById('p3_date').value,
+            el: parseFloat(document.getElementById('z3_bal').value) || 0,
+            ml: parseFloat(document.getElementById('aa3_bal').value) || 0
+        },
+        history: history
+    };
+
+    saveDatabase(db);
+    localStorage.setItem("pmc_active_emp_pf", pf);
+    updateEmployeeDropdown();
+    document.getElementById('global_employee_select').value = pf;
+    document.getElementById('current_active_emp_label').innerText = `🎯 सद्या ॲक्टिव्ह: ${name} (${pf})`;
+    alert("✅ माहिती यशस्वीरित्या सेव्ह झाली!");
+}
+
+function loadSelectedEmployeeData() {
+    let pf = document.getElementById('global_employee_select').value;
+    if (!pf) {
+        history = [];
+        document.getElementById('info_name').value = "";
+        document.getElementById('info_desig').value = "";
+        document.getElementById('info_pf').value = "";
+        document.getElementById('p3_date').value = "";
+        document.getElementById('z3_bal').value = "";
+        document.getElementById('aa3_bal').value = "";
+        localStorage.removeItem("pmc_active_emp_pf");
+        document.getElementById('current_active_emp_label').innerText = '🎯 सद्या ॲक्टिव्ह: कोणतीही नोंद निवडलेली नाही';
+        recalculateAndRender();
+        return;
+    }
+
+    let db = getDatabase();
+    let emp = db[pf];
+    if (emp) {
+        document.getElementById('info_name').value = emp.info.name || "";
+        document.getElementById('info_desig').value = emp.info.desig || "";
+        document.getElementById('info_pf').value = emp.info.pf || "";
+
+        let init = emp.initialValues || { p3: "", el: 0, ml: 0 };
+        document.getElementById('p3_date').value = init.p3 || "";
+        document.getElementById('z3_bal').value = init.el || 0;
+        document.getElementById('aa3_bal').value = init.ml || 0;
+
+        history = emp.history || [];
+        localStorage.setItem("pmc_active_emp_pf", pf);
+        document.getElementById('current_active_emp_label').innerText = `🎯 सद्या ॲक्टिव्ह: ${emp.info.name} (${pf})`;
+        recalculateAndRender();
+    }
+}
+
+function deleteCurrentEmployeeFromDatabase() {
+    let pf = document.getElementById('info_pf').value.trim();
+    if (!pf) return;
+    if (confirm(`कायमचा हटवायचा का? (${pf})`)) {
+        let db = getDatabase();
+        delete db[pf];
+        saveDatabase(db);
+        localStorage.removeItem("pmc_active_emp_pf");
+        updateEmployeeDropdown();
+        loadSelectedEmployeeData();
+        alert("🗑️ कर्मचारी हटवला!");
+    }
+}
+
+function addEntry() {
+    let pf = document.getElementById('info_pf').value.trim();
+    if (!pf) {
+        alert("⚠️ आधी पेज ३ वर PF नंबर भरून सेव्ह करा!");
+        return;
+    }
+
+    let a = document.getElementById('a_start').value;
+    let b = document.getElementById('b_end').value;
+    let o = document.getElementById('o_leave_start').value;
+    let p = document.getElementById('p_leave_end').value;
+    let q = document.getElementById('q_type').value;
+    let e = parseFloat(document.getElementById('e_lwp').value) || 0;
+
+    let entry = { a, b, o, p, q, e };
+    history.push(entry);
+    saveCurrentEmployeeToDatabase();
+    recalculateAndRender();
+}
+
+function recalculateAndRender() {
+    let tbody = document.querySelector("#recordTable tbody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    if (history.length === 0) {
+        document.getElementById('deleteBtn').style.display = "none";
+        return;
+    }
+    document.getElementById('deleteBtn').style.display = "inline-block";
+
+    let curEL = parseFloat(document.getElementById('z3_bal').value) || 0;
+    let curML = parseFloat(document.getElementById('aa3_bal').value) || 0;
+
+    history.forEach((item, index) => {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${item.a || ''} - ${item.b || ''}</td>
+            <td>${item.e || 0}</td>
+            <td>0</td>
+            <td>0</td>
+            <td>${item.q || ''}</td>
+            <td>${curEL}</td>
+            <td>${curML}</td>
+            <td><button class="btn-row-delete" onclick="deleteEntry(${index})">हटवा</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    document.getElementById('total_el_shilak').value = curEL;
+    document.getElementById('total_ml_shilak').value = curML;
+}
+
+function deleteEntry(index) {
+    history.splice(index, 1);
+    saveCurrentEmployeeToDatabase();
+    recalculateAndRender();
+}
+
+function deleteLastEntry() {
+    history.pop();
+    saveCurrentEmployeeToDatabase();
+    recalculateAndRender();
+}
+
+function calculateEncashment() {
+    let el = parseFloat(document.getElementById('total_el_shilak').value) || 0;
+    let basic = parseFloat(document.getElementById('basic_pay').value) || 0;
+    let da = parseFloat(document.getElementById('da_amount').value) || 0;
+
+    let totalSalary = basic + da;
+    let encashVal = Math.round((totalSalary / 30) * Math.min(el, 300));
+    
+    document.getElementById('encashmentResult').innerText = `एकूण रोखीकरण रक्कम: ₹ ${encashVal.toLocaleString('en-IN')}`;
+}
+
+window.onload = function() {
+    updateEmployeeDropdown();
+    let activePf = localStorage.getItem("pmc_active_emp_pf");
+    if (activePf) {
+        document.getElementById('global_employee_select').value = activePf;
+        loadSelectedEmployeeData();
+    }
+};
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
