@@ -1551,21 +1551,21 @@ retireDate: document.getElementById('info_retire_date').value
 }
 
 function saveCurrentEmployeeToDatabase() {
-let pf = document.getElementById('info_pf').value.trim();
-let name = document.getElementById('info_name').value.trim();
-if(!pf || !name) {
-alert("डेटाबेस सेव्ह करण्यासाठी 'कर्मचाऱ्यांचे नाव' आणि 'PF नंबर' असणे आवश्यक आहे!");
-return;
-}
+    let pf = document.getElementById('info_pf').value.trim();
+    let name = document.getElementById('info_name').value.trim();
+    if(!pf || !name) {
+        alert("डेटाबेस सेव्ह करण्यासाठी 'कर्मचाऱ्यांचे नाव' आणि 'PF नंबर' असणे आवश्यक आहे!");
+        return;
+    }
 
-let empInfo = {
-name: name,
-desig: document.getElementById('info_desig').value.trim(),
-dept: document.getElementById('info_dept').value.trim(),
-pf: pf,
-joinDate: document.getElementById('info_join_date').value,
-retireDate: document.getElementById('info_retire_date').value
-};
+    let empInfo = {
+        name: name,
+        desig: document.getElementById('info_desig').value.trim(),
+        dept: document.getElementById('info_dept').value.trim(),
+        pf: pf,
+        joinDate: document.getElementById('info_join_date').value,
+        retireDate: document.getElementById('info_retire_date').value
+    };
 
 let storedInit = JSON.parse(localStorage.getItem("pmc_initial_values")) || initialValues || {};
 let storedHist = JSON.parse(localStorage.getItem("pmc_leave_history")) || history || [];
