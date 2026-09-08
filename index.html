@@ -1567,17 +1567,17 @@ function saveCurrentEmployeeToDatabase() {
         retireDate: document.getElementById('info_retire_date').value
     };
 
-let storedInit = JSON.parse(localStorage.getItem("pmc_initial_values")) || initialValues || {};
-let storedHist = JSON.parse(localStorage.getItem("pmc_leave_history")) || history || [];
-let storedBreaks = JSON.parse(localStorage.getItem("pmc_page_breaks")) || pageBreaks || [];
-let storedPay = JSON.parse(localStorage.getItem("pmc_calc_pay")) || {};
+    let storedInit = JSON.parse(localStorage.getItem("pmc_initial_values")) || initialValues || {};
+    let storedHist = JSON.parse(localStorage.getItem("pmc_leave_history")) || history || [];
+    let storedBreaks = JSON.parse(localStorage.getItem("pmc_page_breaks")) || pageBreaks || [];
+    let storedPay = JSON.parse(localStorage.getItem("pmc_calc_pay")) || {};
 
 let empData = {
-empInfo: empInfo,
-initialValues: storedInit,
-history: storedHist,
-pageBreaks: storedBreaks,
-calcPay: storedPay
+    empInfo: empInfo,
+    initialValues: storedInit,
+    history: storedHist,
+    pageBreaks: storedBreaks,
+    calcPay: storedPay
 };
 
 let localDb = JSON.parse(localStorage.getItem("pmc_employee_db")) || {};
@@ -1591,13 +1591,13 @@ if (!currentUser) { alert("तुम्ही लॉगिन केलेले
 
 db.collection("users").doc(currentUser.email).collection("employees").doc(pf).set(empData)
 .then(() => {
-alert('कर्मचारी ' + name + ' (PF: ' + pf + ') चा संपूर्ण डेटा ऑनलाईन Firebase वर सुरक्षित जतन झाला आहे! ☁️');
-updateEmployeeDropdown();
-document.getElementById('global_employee_select').value = pf;
-loadSelectedEmployeeData();
+    alert('कर्मचारी ' + name + ' (PF: ' + pf + ') चा संपूर्ण डेटा ऑनलाईन Firebase वर सुरक्षित जतन झाला आहे! ☁️');
+    updateEmployeeDropdown();
+    document.getElementById('global_employee_select').value = pf;
+    loadSelectedEmployeeData();
 })
 .catch((error) => {
-alert("डेटा ऑनलाईन सेव्ह करताना तांत्रिक चूक झाली: " + error.message);
+    alert("डेटा ऑनलाईन सेव्ह करताना तांत्रिक चूक झाली: " + error.message);
 });
 }
 // कर्मचारी कायमचा डेटाबेसमधून हटवण्याचे फंक्शन
