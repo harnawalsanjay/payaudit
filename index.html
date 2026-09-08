@@ -86,29 +86,6 @@ tr:nth-child(even) { background-color: #f9f9f9; }
 </style>
 </head>
 <body>
-    // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDF3tAbGqTY4rnLWxSYk8AwGGxsBPjEtjA",
-  authDomain: "payadudit.firebaseapp.com",
-  databaseURL: "https://payadudit-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "payadudit",
-  storageBucket: "payadudit.firebasestorage.app",
-  messagingSenderId: "435815579970",
-  appId: "1:435815579970:web:ff8732b1f928137ac388db",
-  measurementId: "G-34G9PT2KVN"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 <div class="container" id="mainApp" style="display: block;">
     <div style="position: relative; border-bottom: 2px solid #1a73e8; padding-bottom: 10px; margin-bottom: 20px;">
         <h2 style="border: none; margin: 0; padding: 0; text-align: center;">पुणे महानगरपालिका रजा नोंद व सेवानिवृत्ती व्यवस्थापन प्रणाली</h2>
@@ -2266,5 +2243,28 @@ function downloadFixationStatementExcel() {
     const link = document.createElement("a"); link.setAttribute("href", URL.createObjectURL(blob)); link.setAttribute("download", "PMC_Senior_Scale_Difference_Bill.csv"); link.click();
 }
 </script>
+</body>
+        // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDF3tAbGqTY4rnLWxSYk8AwGGxsBPjEtjA",
+  authDomain: "payadudit.firebaseapp.com",
+  databaseURL: "https://payadudit-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "payadudit",
+  storageBucket: "payadudit.firebasestorage.app",
+  messagingSenderId: "435815579970",
+  appId: "1:435815579970:web:ff8732b1f928137ac388db",
+  measurementId: "G-34G9PT2KVN"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 </body>
 </html>
